@@ -3,7 +3,12 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Roboto', 'sans-serif'],
+        heading: ['Poppins', 'sans-serif'],
+      },
       colors: {
+        // Cores da sua base
         background: '#0D0D0D',
         'card-background': '#404040',
         'text-primary': '#D9D9D9',
@@ -11,6 +16,12 @@ export default {
         'accent-primary': '#737373',
         'accent-secondary': '#404040',
         'dark-purple': '#2a004f',
+
+        // Cores adicionadas para os novos estilos
+        'stat-card': '#271C35',
+        'bar-track': 'rgba(26, 17, 38, 0.7)',
+        'grad-purple-from': '#8B5CF6',
+        'grad-purple-to': '#6D28D9',
       },
       keyframes: {
         'fade-in-up': {

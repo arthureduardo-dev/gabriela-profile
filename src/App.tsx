@@ -7,6 +7,7 @@ import { Stats } from './components/Stats';
 import { Clips } from './components/Clips';
 import { Services } from './components/Services';
 import { Contact } from './components/Contact';
+import { StreamerBackground } from './components/StreamerBackground';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -71,15 +72,19 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-dark-purple text-text-primary font-sans">
-      <DotNav sections={sections} activeSection={activeSection} onNavClick={handleNavClick} />
-      <div className="scroll-container hide-scrollbar">
-        <Home />
-        <About onMouseMove={handleMouseMove} />
-        <Stats onMouseMove={handleMouseMove} />
-        <Clips />
-        <Services onMouseMove={handleMouseMove} />
-        <Contact onMouseMove={handleMouseMove} />
+    <div className="relative min-h-screen bg-gradient-to-br from-background to-dark-purple text-text-primary font-sans overflow-hidden">
+      <StreamerBackground />
+
+      <div className="relative z-10">
+        <DotNav sections={sections} activeSection={activeSection} onNavClick={handleNavClick} />
+        <div className="scroll-container hide-scrollbar">
+          <Home />
+          <About onMouseMove={handleMouseMove} />
+          <Stats onMouseMove={handleMouseMove} />
+          <Clips />
+          <Services onMouseMove={handleMouseMove} />
+          <Contact onMouseMove={handleMouseMove} />
+        </div>
       </div>
     </div>
   );

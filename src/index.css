@@ -42,9 +42,9 @@ html, body, #root {
   position: absolute;
   left: var(--x, 50%);
   top: var(--y, 50%);
-  width: 250px;
-  height: 250px;
-  background: radial-gradient(circle at center, rgba(145, 70, 255, 0.25), transparent 40%);
+  width: 350px; /* Aumentado */
+  height: 350px; /* Aumentado */
+  background: radial-gradient(circle at center, rgba(145, 70, 255, 0.15), transparent 50%); /* Mais suave */
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: opacity 0.5s;
@@ -67,9 +67,9 @@ html, body, #root {
 }
 
 .glass-effect {
-  background: rgba(64, 64, 64, 0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.05); /* Mais subtil */
+  backdrop-filter: blur(16px); /* Desfoque maior */
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
