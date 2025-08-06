@@ -23,9 +23,15 @@ export default {
             transform: 'translateY(0)',
           },
         },
+        'text-shadow-pulse': {
+          '0%': { textShadow: '0 0 0px rgba(145, 70, 255, 0)' },
+          '50%': { textShadow: '0 0 15px rgba(145, 70, 255, 0.8)' },
+          '100%': { textShadow: '0 0 0px rgba(145, 70, 255, 0)' },
+        },
       },
       animation: {
         'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
+        'text-shadow-pulse': 'text-shadow-pulse 1.5s ease-out forwards',
       },
     },
   },
