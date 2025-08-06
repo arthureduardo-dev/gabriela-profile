@@ -10,6 +10,7 @@ export default {
         'text-secondary': '#BFBFBF',
         'accent-primary': '#737373',
         'accent-secondary': '#404040',
+        'dark-purple': '#2a004f',
       },
     },
   },
