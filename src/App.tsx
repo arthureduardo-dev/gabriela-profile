@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Mail, Users, TrendingUp, Heart, MessageCircle, Instagram, Camera, Video, Gift, Percent, User, UserCheck, Youtube, Clapperboard } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Mail, Users, TrendingUp, Heart, MessageCircle, Instagram, Camera, Video, Gift, Percent, User, UserCheck, Youtube, Clapperboard, PlayCircle } from 'lucide-react';
 
 const DotNav = ({ sections, activeSection, onNavClick }: { sections: string[], activeSection: string, onNavClick: (sectionId: string) => void }) => {
   return (
@@ -14,7 +14,7 @@ const DotNav = ({ sections, activeSection, onNavClick }: { sections: string[], a
             {section}
           </span>
           <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${activeSection === section ? 'bg-text-primary' : 'bg-dark-purple'}`}>
-             <span className={`font-bold transition-colors duration-300 ${activeSection === section ? 'text-background' : 'text-text-secondary'}`}>
+             <span className={`font-bold transition-colors duration-300 ${activeSection === section ? 'text-background' : 'text-text-primary'}`}>
               {section.charAt(0).toUpperCase()}
             </span>
           </div>
@@ -55,6 +55,7 @@ function App() {
 
   const [activeClipIndex, setActiveClipIndex] = useState(0);
   const [activeSection, setActiveSection] = useState('home');
+  const [loadVideo, setLoadVideo] = useState(false);
   const sections = ['home', 'about', 'stats', 'clips', 'services', 'contact'];
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
@@ -118,6 +119,11 @@ function App() {
 
   const handleDotClick = (index: number) => {
     setActiveClipIndex(index);
+    setLoadVideo(false);
+  };
+
+  const handlePlayClick = () => {
+    setLoadVideo(true);
   };
 
   return (
@@ -258,16 +264,29 @@ function App() {
               <Clapperboard className="mr-3" size={24} />
               Clipes em Destaque
             </h2>
-            <div className="relative w-full md:w-4/5 lg:w-3/5 aspect-video rounded-2xl overflow-hidden border border-dark-purple/30">
-              <iframe
-                key={activeClipIndex}
-                className="w-full h-full"
-                src={`https://www.youtube.com/embed/${clipsData[activeClipIndex].videoId}?autoplay=1&mute=1&loop=1&playlist=${clipsData[activeClipIndex].videoId}`}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              ></iframe>
+            <div className="relative w-full md:w-4/5 lg:w-3/5 aspect-video rounded-2xl overflow-hidden border border-dark-purple/30 bg-black">
+              {loadVideo ? (
+                <iframe
+                  key={clipsData[activeClipIndex].videoId}
+                  className="w-full h-full"
+                  src={`https://www.youtube.com/embed/${clipsData[activeClipIndex].videoId}?autoplay=1&mute=1&loop=1&playlist=${clipsData[activeClipIndex].videoId}`}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <div className="w-full h-full flex items-center justify-center cursor-pointer" onClick={handlePlayClick}>
+                  <img
+                    src={`https://img.youtube.com/vi/${clipsData[activeClipIndex].videoId}/hqdefault.jpg`}
+                    alt="Video thumbnail"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute">
+                    <PlayCircle className="text-white text-opacity-80 hover:text-opacity-100 transition-opacity" size={64} />
+                  </div>
+                </div>
+              )}
             </div>
             <div className="flex justify-center mt-4 space-x-2">
               {clipsData.map((_, index) => (
