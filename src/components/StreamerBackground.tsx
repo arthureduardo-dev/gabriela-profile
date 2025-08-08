@@ -16,12 +16,23 @@ const shapes = [
   { d: "M 0 0 H 100 V 100 H 0 Z", size: 22, color: "#8B5CF6", top: "85%", left: "40%", duration: 52 },
 ];
 
+const emotes = [
+  { src: 'https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_79af754bd1c54adbabb5e675f6a9766a/default/dark/2.0', size: 50, top: '20%', left: '70%', duration: 48 },
+  { src: 'https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_9774e49f46e74e32add778c1cadc1d1c/default/light/1.0', size: 45, top: '60%', left: '20%', duration: 53 },
+  { src: 'https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_057177abe10e4ddc8720e512013a64a0/default/light/1.0', size: 55, top: '30%', left: '30%', duration: 42 },
+  { src: 'https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_d9f7edd8a3434115b8c57debbaac8cd2/default/light/1.0', size: 40, top: '90%', left: '60%', duration: 65 },
+  { src: 'https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_272a0eae61654738807f02b9b6eb4f5e/default/light/1.0', size: 60, top: '5%', left: '40%', duration: 38 },
+  { src: 'https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_63466316ccff490eb59e8f06bc607d03/default/light/1.0', size: 48, top: '65%', left: '95%', duration: 58 },
+  { src: 'https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_01134f330f864e7abae859c9d6d5460e/default/light/1.0', size: 52, top: '92%', left: '25%', duration: 46 },
+  { src: 'https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_0e89453eb6624bfc81ea3051d4595d5a/default/light/1.0', size: 43, top: '45%', left: '65%', duration: 51 },
+];
+
 export const StreamerBackground = () => {
   return (
     <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
       {shapes.map((shape, index) => (
         <motion.div
-          key={index}
+          key={`shape-${index}`}
           className="absolute"
           style={{
             top: shape.top,
@@ -49,6 +60,36 @@ export const StreamerBackground = () => {
           >
             <path d={shape.d} />
           </svg>
+        </motion.div>
+      ))}
+      {emotes.map((emote, index) => (
+        <motion.div
+          key={`emote-${index}`}
+          className="absolute"
+          style={{
+            top: emote.top,
+            left: emote.left,
+            width: emote.size,
+            height: emote.size,
+          }}
+          animate={{
+            y: ["0%", "-15%", "20%", "-10%", "0%"],
+            x: ["0%", "10%", "-15%", "20%", "0%"],
+            rotate: [0, -30, 50, -10, 0],
+          }}
+          transition={{
+            duration: emote.duration,
+            ease: "linear",
+            repeat: Infinity,
+            repeatType: "mirror",
+          }}
+        >
+          <img
+            src={emote.src}
+            alt=""
+            className="w-full h-full"
+            style={{ opacity: 0.4 }}
+          />
         </motion.div>
       ))}
     </div>

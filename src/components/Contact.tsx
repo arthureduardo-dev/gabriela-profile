@@ -1,4 +1,11 @@
 import { Mail, Instagram, Youtube } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faInstagram,
+  faYoutube,
+  faTwitch,
+  faKickstarterK,
+} from '@fortawesome/free-brands-svg-icons';
 
 interface ContactProps {
   onMouseMove: (e: React.MouseEvent<HTMLElement>) => void;
@@ -11,7 +18,9 @@ export const Contact = ({ onMouseMove }: ContactProps) => {
         className="card-glow glass-effect text-center rounded-2xl p-8 max-w-4xl w-full transition-transform duration-300 hover:-translate-y-2"
         onMouseMove={onMouseMove}
       >
-        <h2 className="text-2xl font-semibold mb-6 text-text-primary">Contato</h2>
+        <h2 className="text-2xl font-semibold mb-6 text-text-primary">
+          Contato
+        </h2>
         <div className="flex justify-center space-x-8">
           <a
             href="mailto:contatoyungyro@gmail.com"
@@ -38,7 +47,9 @@ export const Contact = ({ onMouseMove }: ContactProps) => {
 
         <footer className="mt-12 pt-8 border-t border-dark-purple/20">
           <div className="text-center">
-            <h3 className="text-lg font-medium mb-6 text-text-secondary">Siga nas Redes Sociais</h3>
+            <h3 className="text-lg font-medium mb-6 text-text-secondary">
+              Siga nas Redes Sociais
+            </h3>
             <div className="flex justify-center space-x-8">
               <a
                 href="https://www.twitch.tv/yungyro"
@@ -47,9 +58,7 @@ export const Contact = ({ onMouseMove }: ContactProps) => {
                 className="flex flex-col items-center text-text-primary hover:text-[#9146FF] transition-all duration-300 group"
               >
                 <div className="w-12 h-12 bg-card-background rounded-full flex items-center justify-center mb-2 group-hover:bg-[#9146FF]/10 transition-all duration-300 transform group-hover:scale-110">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
-                  </svg>
+                  <FontAwesomeIcon icon={faTwitch} size="xl" />
                 </div>
                 <span className="text-sm font-medium">Twitch</span>
               </a>
@@ -61,9 +70,7 @@ export const Contact = ({ onMouseMove }: ContactProps) => {
                 className="flex flex-col items-center text-text-primary hover:text-[#53FC18] transition-all duration-300 group"
               >
                 <div className="w-12 h-12 bg-card-background rounded-full flex items-center justify-center mb-2 group-hover:bg-[#53FC18]/10 transition-all duration-300 transform group-hover:scale-110">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-                  </svg>
+                  <FontAwesomeIcon icon={faKickstarterK} size="xl" />
                 </div>
                 <span className="text-sm font-medium">Kick</span>
               </a>
@@ -75,7 +82,7 @@ export const Contact = ({ onMouseMove }: ContactProps) => {
                 className="flex flex-col items-center text-text-primary hover:text-[#E4405F] transition-all duration-300 group"
               >
                 <div className="w-12 h-12 bg-card-background rounded-full flex items-center justify-center mb-2 group-hover:bg-[#E4405F]/10 transition-all duration-300 transform group-hover:scale-110">
-                  <Instagram size={24} />
+                  <FontAwesomeIcon icon={faInstagram} size="xl" />
                 </div>
                 <span className="text-sm font-medium">Instagram</span>
               </a>
@@ -87,7 +94,7 @@ export const Contact = ({ onMouseMove }: ContactProps) => {
                 className="flex flex-col items-center text-text-primary hover:text-[#FF0000] transition-all duration-300 group"
               >
                 <div className="w-12 h-12 bg-card-background rounded-full flex items-center justify-center mb-2 group-hover:bg-[#FF0000]/10 transition-all duration-300 transform group-hover:scale-110">
-                  <Youtube size={24} />
+                  <FontAwesomeIcon icon={faYoutube} size="xl" />
                 </div>
                 <span className="text-sm font-medium">YouTube</span>
               </a>

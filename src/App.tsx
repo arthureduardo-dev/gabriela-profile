@@ -8,9 +8,19 @@ import { Clips } from './components/Clips';
 import { Services } from './components/Services';
 import { Contact } from './components/Contact';
 import { StreamerBackground } from './components/StreamerBackground';
+import SmileyPreloader from './components/SmileyPreloader'; // Alterado
 
 function App() {
+  const [loading, setLoading] = useState(true);
   const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 4000); 
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -28,6 +38,8 @@ function App() {
   };
 
   useEffect(() => {
+    if (loading) return;
+
     const navObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
@@ -69,7 +81,15 @@ function App() {
         }
       });
     };
-  }, []);
+  }, [loading]);
+
+  if (loading) {
+    return (
+      <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-br from-background to-dark-purple text-text-primary font-sans overflow-hidden">
+        <SmileyPreloader />
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-background to-dark-purple text-text-primary font-sans overflow-hidden">
