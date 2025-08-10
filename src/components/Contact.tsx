@@ -1,4 +1,4 @@
-import { Mail, Instagram, Youtube } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faInstagram,
@@ -15,42 +15,43 @@ export const Contact = ({ onMouseMove }: ContactProps) => {
   return (
     <section id="contact" className="scroll-section">
       <div
-        className="card-glow glass-effect text-center rounded-2xl p-8 max-w-4xl w-full transition-transform duration-300 hover:-translate-y-2"
+        className="card-glow glass-effect rounded-2xl p-8 max-w-4xl w-full transition-transform duration-300 hover:-translate-y-2"
         onMouseMove={onMouseMove}
       >
-        <h2 className="text-2xl font-semibold mb-6 text-text-primary">
-          Contato
-        </h2>
-        <div className="flex justify-center space-x-8">
-          <a
-            href="mailto:contatoyungyro@gmail.com"
-            className="flex items-center text-text-primary hover:text-text-secondary transition-colors duration-300 group"
-          >
-            <Mail className="mr-2 group-hover:scale-110 transition-transform duration-300" size={20} />
-            <span>contatoyungyro@gmail.com</span>
-          </a>
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          
+          <div className="flex flex-col text-center md:text-left">
+            <h2 className="text-2xl font-semibold mb-6 text-text-primary">
+              Contato
+            </h2>
+            <div className="flex flex-col space-y-4 mb-10">
+              <a
+                href="mailto:contatoyungyro@gmail.com"
+                className="flex items-center justify-center md:justify-start text-text-primary hover:text-text-secondary transition-colors duration-300 group"
+              >
+                <Mail className="mr-2 group-hover:scale-110 transition-transform duration-300" size={20} />
+                <span>contatoyungyro@gmail.com</span>
+              </a>
 
-          <a
-            href="https://x.com/yungyro"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-text-primary hover:text-text-secondary transition-colors duration-300 group"
-          >
-            <div className="mr-2 group-hover:scale-110 transition-transform duration-300">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
+              <a
+                href="https://x.com/yungyro"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center md:justify-start text-text-primary hover:text-text-secondary transition-colors duration-300 group"
+              >
+                <div className="mr-2 group-hover:scale-110 transition-transform duration-300">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </div>
+                <span>@yungyro</span>
+              </a>
             </div>
-            <span>@yungyro</span>
-          </a>
-        </div>
 
-        <footer className="mt-12 pt-8 border-t border-dark-purple/20">
-          <div className="text-center">
             <h3 className="text-lg font-medium mb-6 text-text-secondary">
               Siga nas Redes Sociais
             </h3>
-            <div className="flex justify-center space-x-8">
+            <div className="flex justify-center md:justify-start space-x-6">
               <a
                 href="https://www.twitch.tv/yungyro"
                 target="_blank"
@@ -100,7 +101,16 @@ export const Contact = ({ onMouseMove }: ContactProps) => {
               </a>
             </div>
           </div>
-        </footer>
+          
+          <div className="flex justify-center items-center">
+            <img
+              src="https://pbs.twimg.com/profile_images/1952028965897445376/liE_oQAO_400x400.jpg"
+              alt="Foto de Gabriela Carrilho"
+              className="rounded-lg w-64 h-64 object-cover object-center border-4 border-dark-purple/30 shadow-2xl"
+            />
+          </div>
+
+        </div>
       </div>
     </section>
   );

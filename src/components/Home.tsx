@@ -22,7 +22,7 @@ export const Home = () => {
         
         <AnimatedTitle 
           text="GABRIELA CARRILHO"
-          className="text-5xl !font-bold tracking-wide !mb-2 justify-center"
+          className="text-5xl !font-bold tracking-wide !mb-2 justify-center font-inlanders"
         />
 
         <motion.p 

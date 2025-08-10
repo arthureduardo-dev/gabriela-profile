@@ -47,7 +47,7 @@ export const About = ({ onMouseMove }: AboutProps) => {
             <User className="mr-3" size={24} />
             Sobre mim
           </h2>
-          <p className="text-lg leading-relaxed text-text-primary">
+          <p className="text-lg leading-relaxed text-text-primary text-justify">
             Oi! Eu sou a Gabriela, sou criadora de conteúdo, faço lives na Twitch, Kick e YouTube.
             Meu foco é gameplay de jogos variados, interação com o chat, humor com memes, dicas de
             looks e alimentação saudável - sempre de forma leve e sem neura! Meu objetivo é criar um
@@ -57,16 +57,16 @@ export const About = ({ onMouseMove }: AboutProps) => {
         </div>
         <div className="flex justify-end items-center mt-6 space-x-4 text-2xl">
             <a href="https://www.twitch.tv/yungyro" target="_blank" rel="noopener noreferrer" aria-label="Twitch" className="text-accent-primary hover:text-[#9146FF] transition-colors duration-300">
-                <FontAwesomeIcon icon={faTwitch} />
+                <FontAwesomeIcon icon={faTwitch} className="transform hover:scale-110 transition-transform"/>
             </a>
             <a href="https://kick.com/yungyro" target="_blank" rel="noopener noreferrer" aria-label="Kick" className="text-accent-primary hover:text-[#53FC18] transition-colors duration-300">
-                <FontAwesomeIcon icon={faKickstarterK} />
+                <FontAwesomeIcon icon={faKickstarterK} className="transform hover:scale-110 transition-transform"/>
             </a>
             <a href="https://www.instagram.com/yungyro" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-accent-primary hover:text-[#E4405F] transition-colors duration-300">
-                <FontAwesomeIcon icon={faInstagram} />
+                <FontAwesomeIcon icon={faInstagram} className="transform hover:scale-110 transition-transform"/>
             </a>
             <a href="https://www.youtube.com/@yungyro" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-accent-primary hover:text-[#FF0000] transition-colors duration-300">
-                <FontAwesomeIcon icon={faYoutube} />
+                <FontAwesomeIcon icon={faYoutube} className="transform hover:scale-110 transition-transform"/>
             </a>
         </div>
       </motion.div>

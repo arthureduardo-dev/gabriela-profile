@@ -8,7 +8,7 @@ import { Clips } from './components/Clips';
 import { Services } from './components/Services';
 import { Contact } from './components/Contact';
 import { StreamerBackground } from './components/StreamerBackground';
-import SmileyPreloader from './components/SmileyPreloader'; // Alterado
+import SmileyPreloader from './components/SmileyPreloader';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -33,30 +33,33 @@ function App() {
   const handleNavClick = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
 
   useEffect(() => {
     if (loading) return;
 
-    const navObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
 
     const animationObserver = new IntersectionObserver(
-      (entries, observer) => {
+      (entries, animObserver) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('section-visible');
-            observer.unobserve(entry.target);
+            animObserver.unobserve(entry.target);
           }
         });
       },
@@ -67,7 +70,7 @@ function App() {
       const element = document.getElementById(id);
       if (element) {
         element.classList.add('section-fade-in');
-        navObserver.observe(element);
+        observer.observe(element);
         animationObserver.observe(element);
       }
     });
@@ -76,7 +79,7 @@ function App() {
       sections.forEach(id => {
         const element = document.getElementById(id);
         if (element) {
-          navObserver.unobserve(element);
+          observer.unobserve(element);
           animationObserver.unobserve(element);
         }
       });
@@ -95,16 +98,15 @@ function App() {
     <div className="relative min-h-screen bg-gradient-to-br from-background to-dark-purple text-text-primary font-sans overflow-hidden">
       <StreamerBackground />
 
-      <div className="relative z-10">
+      <div className="relative z-10 section-container">
         <DotNav sections={sections} activeSection={activeSection} onNavClick={handleNavClick} />
-        <div className="scroll-container hide-scrollbar">
-          <Home />
-          <About onMouseMove={handleMouseMove} />
-          <Stats onMouseMove={handleMouseMove} />
-          <Clips />
-          <Services onMouseMove={handleMouseMove} />
-          <Contact onMouseMove={handleMouseMove} />
-        </div>
+        
+        <Home />
+        <About onMouseMove={handleMouseMove} />
+        <Stats onMouseMove={handleMouseMove} />
+        <Clips />
+        <Services onMouseMove={handleMouseMove} />
+        <Contact onMouseMove={handleMouseMove} />
       </div>
     </div>
   );

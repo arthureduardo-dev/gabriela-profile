@@ -12,19 +12,23 @@ export const Services = ({ onMouseMove }: ServicesProps) => {
         className="card-glow glass-effect rounded-2xl p-8 max-w-4xl w-full transition-transform duration-300 hover:-translate-y-2"
         onMouseMove={onMouseMove}
       >
-        <h2 className="text-2xl font-semibold mb-6 text-text-primary flex items-center">
+        <h2 className="text-2xl font-semibold mb-8 text-text-primary flex items-center justify-center">
           <TrendingUp className="mr-3" size={24} />
           Serviços Oferecidos
         </h2>
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <div
               key={index}
-              className="flex items-center p-4 bg-card-background/30 rounded-lg hover:bg-card-background/50 transition-all duration-300 hover:scale-105 opacity-0 animate-fade-in-up"
+              className="group relative rounded-lg p-[2px] bg-transparent hover:bg-gradient-to-br from-grad-purple-from to-grad-purple-to transition-all duration-300 hover:scale-105 opacity-0 animate-fade-in-up"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <service.icon className="mr-4 text-text-secondary flex-shrink-0" size={20} />
-              <span className="text-text-primary">{service.text}</span>
+              <div className="bg-card-background/80 rounded-[7px] h-full w-full p-6 flex flex-col items-center text-center">
+                <div className="w-12 h-12 mb-4 rounded-full flex items-center justify-center bg-dark-purple text-grad-purple-from transition-all duration-300 group-hover:bg-background group-hover:text-white group-hover:scale-110">
+                  <service.icon size={28} />
+                </div>
+                <span className="text-text-primary font-medium">{service.text}</span>
+              </div>
             </div>
           ))}
         </div>
