@@ -13,7 +13,7 @@ export const Home = () => {
         >
           <div className="w-48 h-48 mx-auto mb-6 rounded-full bg-gradient-to-br from-grad-purple-from to-grad-purple-to p-1.5 shadow-2xl transition-all duration-500 hover:shadow-purple-500/50 hover:scale-105">
             <img
-              src="https://pbs.twimg.com/media/Gwn1R2tXUAELGf8?format=jpg&name=large"
+              src="https://res.cloudinary.com/dtuacdvn6/image/upload/v1754910789/488542267_17947660721955577_4155195984179514929_n_qcgrdj.jpg"
               alt="Foto de Gabriela Carrilho"
               className="w-full h-full rounded-full object-cover border-4 border-background"
             />
@@ -22,7 +22,7 @@ export const Home = () => {
         
         <AnimatedTitle 
           text="GABRIELA CARRILHO"
-          className="text-5xl !font-bold tracking-wide !mb-2 justify-center font-inlanders"
+          className="text-5xl !font-bold tracking-wide !mb-2 justify-center font-heading"
         />
 
         <motion.p 

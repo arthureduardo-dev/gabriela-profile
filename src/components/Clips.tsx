@@ -50,7 +50,7 @@ export const Clips = () => {
   return (
     <section id="clips" className="scroll-section">
       <div className="w-full max-w-4xl flex flex-col items-center">
-        <h2 className="text-2xl font-semibold mb-2 text-text-primary flex items-center">
+        <h2 className="text-2xl font-semibold mb-2 text-text-primary flex items-center font-heading">
           <Clapperboard className="mr-3" size={24} />
           Clipes em Destaque
         </h2>

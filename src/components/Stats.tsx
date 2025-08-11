@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Users, TrendingUp, Heart, MessageCircle, Instagram } from 'lucide-react';
 import { demographicsData, ageData } from '../data';
 import { CountUpNumber } from './CountUpNumber';
@@ -43,6 +44,17 @@ export const Stats = ({ onMouseMove }: StatsProps) => {
     { icon: MessageCircle, label: 'Curtidas e Comentários', value: 50000, suffix: '', prefix: '+' }
   ];
 
+  const barVariants = {
+    hidden: { width: 0 },
+    visible: (percentage: number) => ({
+      width: `${percentage}%`,
+      transition: {
+        duration: 1.2,
+        ease: [0.16, 1, 0.3, 1] // Ease Out Expo
+      }
+    })
+  };
+
   return (
     <section id="stats" className="scroll-section">
       <div ref={statsRef} className="grid md:grid-cols-2 gap-8 max-w-4xl w-full mx-auto">
@@ -50,7 +62,7 @@ export const Stats = ({ onMouseMove }: StatsProps) => {
           className="card-glow glass-effect rounded-2xl p-8 transition-transform duration-300 hover:-translate-y-2 flex flex-col"
           onMouseMove={onMouseMove}
         >
-          <h2 className="text-xl font-semibold mb-8 text-text-primary flex items-center">
+          <h2 className="text-xl font-semibold mb-8 text-text-primary flex items-center font-heading">
             <Users className="mr-3 text-text-secondary" size={24} />
             Demografia do Público
           </h2>
@@ -64,7 +76,7 @@ export const Stats = ({ onMouseMove }: StatsProps) => {
               ))}
             </div>
             <div className="mt-8">
-              <h3 className="text-lg font-medium mb-4 text-text-primary text-center">Principais Faixas Etárias</h3>
+              <h3 className="text-lg font-medium mb-4 text-text-primary text-center font-heading">Principais Faixas Etárias</h3>
               {ageData.map((item, index) => (
                 <div key={index} className="mb-4">
                   <div className="flex justify-between items-center mb-2">
@@ -78,9 +90,12 @@ export const Stats = ({ onMouseMove }: StatsProps) => {
                       />
                   </div>
                   <div className="w-full bg-bar-track rounded-full h-2.5">
-                    <div
-                      className="bg-gradient-to-r from-grad-purple-from to-grad-purple-to h-2.5 rounded-full transition-all duration-[1500ms] ease-out shadow-lg shadow-purple-500/50"
-                      style={{ width: isVisible ? `${item.percentage}%` : '0%' }}
+                    <motion.div
+                      className="bg-gradient-to-r from-grad-purple-from to-grad-purple-to h-2.5 rounded-full shadow-lg shadow-purple-500/50"
+                      custom={item.percentage}
+                      initial="hidden"
+                      animate={isVisible ? "visible" : "hidden"}
+                      variants={barVariants}
                     />
                   </div>
                 </div>
@@ -92,7 +107,7 @@ export const Stats = ({ onMouseMove }: StatsProps) => {
           className="card-glow glass-effect rounded-2xl p-8 transition-transform duration-300 hover:-translate-y-2 flex flex-col"
           onMouseMove={onMouseMove}
         >
-          <h2 className="text-xl font-semibold mb-8 text-text-primary flex items-center">
+          <h2 className="text-xl font-semibold mb-8 text-text-primary flex items-center font-heading">
             <Instagram className="mr-3 text-text-secondary" size={24} />
             Estatísticas do Instagram
           </h2>

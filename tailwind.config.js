@@ -5,8 +5,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Roboto', 'sans-serif'],
-        heading: ['Poppins', 'sans-serif'],
-        inlanders: ['"Inlanders"', 'sans-serif'],
+        heading: ['"Good Times"', 'sans-serif'],
       },
       colors: {
         background: '#0D0D0D',

@@ -7,12 +7,15 @@ import {
   faTwitch,
   faKickstarterK,
 } from '@fortawesome/free-brands-svg-icons';
+import { useCursor } from '../context/CursorContext';
 
 interface AboutProps {
   onMouseMove: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 export const About = ({ onMouseMove }: AboutProps) => {
+  const { setCursorVariant } = useCursor();
+
   const cardVariants = {
     offscreen: {
       y: 50,
@@ -29,20 +32,23 @@ export const About = ({ onMouseMove }: AboutProps) => {
     },
   };
 
+  const handleMouseEnter = () => setCursorVariant('link');
+  const handleMouseLeave = () => setCursorVariant('default');
+
   return (
     <motion.section
       id="about"
       className="scroll-section"
       initial="offscreen"
       whileInView="onscreen"
-      viewport={{ once: true, amount: 0.8 }}
+      viewport={{ once: true, amount: 0.5 }}
     >
       <motion.div
-        className="card-glow glass-effect rounded-2xl p-8 max-w-4xl w-full transition-transform duration-300 hover:-translate-y-2 flex flex-col"
+        className="card-glow glass-effect rounded-2xl p-8 max-w-4xl w-full transition-transform duration-300 hover:-translate-y-2 grid grid-cols-1 md:grid-cols-5 gap-8 items-center"
         onMouseMove={onMouseMove}
         variants={cardVariants}
       >
-        <div className="flex-grow">
+        <div className="md:col-span-3">
           <h2 className="text-2xl font-semibold mb-6 text-text-primary flex items-center font-heading">
             <User className="mr-3" size={24} />
             Sobre mim
@@ -54,20 +60,72 @@ export const About = ({ onMouseMove }: AboutProps) => {
             espaço acolhedor e animado, onde as pessoas possam rir, se sentir bem e trocar ideias
             sobre o que amam.
           </p>
+          <div className="flex justify-start items-center mt-6 space-x-4 text-2xl">
+            <motion.a 
+              href="https://www.twitch.tv/yungyro" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="Twitch" 
+              className="text-accent-primary hover:text-[#9146FF] transition-colors duration-300"
+              whileHover={{ y: -2, scale: 1.1, rotate: 5 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+                <FontAwesomeIcon icon={faTwitch}/>
+            </motion.a>
+            <motion.a 
+              href="https://kick.com/yungyro" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="Kick" 
+              className="text-accent-primary hover:text-[#53FC18] transition-colors duration-300"
+              whileHover={{ y: -2, scale: 1.1, rotate: -5 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+                <FontAwesomeIcon icon={faKickstarterK}/>
+            </motion.a>
+            <motion.a 
+              href="https://www.instagram.com/yungyro" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="Instagram" 
+              className="text-accent-primary hover:text-[#E4405F] transition-colors duration-300"
+              whileHover={{ y: -2, scale: 1.1, rotate: 5 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+                <FontAwesomeIcon icon={faInstagram}/>
+            </motion.a>
+            <motion.a 
+              href="https://www.youtube.com/@yungyro" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="YouTube" 
+              className="text-accent-primary hover:text-[#FF0000] transition-colors duration-300"
+              whileHover={{ y: -2, scale: 1.1, rotate: -5 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+                <FontAwesomeIcon icon={faYoutube}/>
+            </motion.a>
+          </div>
         </div>
-        <div className="flex justify-end items-center mt-6 space-x-4 text-2xl">
-            <a href="https://www.twitch.tv/yungyro" target="_blank" rel="noopener noreferrer" aria-label="Twitch" className="text-accent-primary hover:text-[#9146FF] transition-colors duration-300">
-                <FontAwesomeIcon icon={faTwitch} className="transform hover:scale-110 transition-transform"/>
-            </a>
-            <a href="https://kick.com/yungyro" target="_blank" rel="noopener noreferrer" aria-label="Kick" className="text-accent-primary hover:text-[#53FC18] transition-colors duration-300">
-                <FontAwesomeIcon icon={faKickstarterK} className="transform hover:scale-110 transition-transform"/>
-            </a>
-            <a href="https://www.instagram.com/yungyro" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-accent-primary hover:text-[#E4405F] transition-colors duration-300">
-                <FontAwesomeIcon icon={faInstagram} className="transform hover:scale-110 transition-transform"/>
-            </a>
-            <a href="https://www.youtube.com/@yungyro" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-accent-primary hover:text-[#FF0000] transition-colors duration-300">
-                <FontAwesomeIcon icon={faYoutube} className="transform hover:scale-110 transition-transform"/>
-            </a>
+        
+        <div className="md:col-span-2 flex justify-center items-center">
+          <motion.img
+            src="https://pbs.twimg.com/profile_images/1952028965897445376/liE_oQAO_400x400.jpg"
+            alt="Foto de Gabriela Carrilho"
+            className="w-64 h-64 rounded-lg object-cover border-4 border-dark-purple/30 shadow-2xl transition-transform duration-300 md:translate-x-16"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.5 }}
+          />
         </div>
       </motion.div>
     </motion.section>
