@@ -33,10 +33,10 @@ export const Clips = () => {
   const videoId = clipsData[activeClipIndex].videoId;
 
   const paginate = (newDirection: number) => {
-    setPage([page + newDirection, newDirection]);
+    setPage([(page + newDirection + clipsData.length) % clipsData.length, newDirection]);
     setLoadVideo(false);
   };
-  
+
   const handleDotClick = (index: number) => {
     const newDirection = index > activeClipIndex ? 1 : -1;
     setPage([index, newDirection]);
@@ -57,7 +57,7 @@ export const Clips = () => {
         <p className="text-text-secondary mb-8 text-center">
           Alguns dos melhores (e mais engraçados) momentos que rolaram nas lives.
         </p>
-        
+
         <div className="relative w-full aspect-video flex items-center justify-center overflow-hidden rounded-2xl bg-black border border-dark-purple/30 shadow-2xl shadow-purple-500/20">
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
@@ -95,7 +95,7 @@ export const Clips = () => {
                   allowFullScreen
                 ></iframe>
               ) : (
-                <div 
+                <div
                   className="w-full h-full flex items-center justify-center cursor-pointer bg-cover bg-center"
                   style={{ backgroundImage: `url(https://i.ytimg.com/vi/${videoId}/hqdefault.jpg)` }}
                   onClick={handlePlayClick}
@@ -105,7 +105,7 @@ export const Clips = () => {
               )}
             </motion.div>
           </AnimatePresence>
-          
+
           <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between px-4 z-10 pointer-events-none">
             <button onClick={() => paginate(-1)} className="pointer-events-auto bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition-colors">
               <ChevronLeft size={24} />

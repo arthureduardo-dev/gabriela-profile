@@ -60,62 +60,8 @@ export const About = ({ onMouseMove }: AboutProps) => {
             espaço acolhedor e animado, onde as pessoas possam rir, se sentir bem e trocar ideias
             sobre o que amam.
           </p>
-          <div className="flex justify-start items-center mt-6 space-x-4 text-2xl">
-            <motion.a 
-              href="https://www.twitch.tv/yungyro" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              aria-label="Twitch" 
-              className="text-accent-primary hover:text-[#9146FF] transition-colors duration-300"
-              whileHover={{ y: -2, scale: 1.1, rotate: 5 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-                <FontAwesomeIcon icon={faTwitch}/>
-            </motion.a>
-            <motion.a 
-              href="https://kick.com/yungyro" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              aria-label="Kick" 
-              className="text-accent-primary hover:text-[#53FC18] transition-colors duration-300"
-              whileHover={{ y: -2, scale: 1.1, rotate: -5 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-                <FontAwesomeIcon icon={faKickstarterK}/>
-            </motion.a>
-            <motion.a 
-              href="https://www.instagram.com/yungyro" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              aria-label="Instagram" 
-              className="text-accent-primary hover:text-[#E4405F] transition-colors duration-300"
-              whileHover={{ y: -2, scale: 1.1, rotate: 5 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-                <FontAwesomeIcon icon={faInstagram}/>
-            </motion.a>
-            <motion.a 
-              href="https://www.youtube.com/@yungyro" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              aria-label="YouTube" 
-              className="text-accent-primary hover:text-[#FF0000] transition-colors duration-300"
-              whileHover={{ y: -2, scale: 1.1, rotate: -5 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-                <FontAwesomeIcon icon={faYoutube}/>
-            </motion.a>
-          </div>
         </div>
-        
+
         <div className="md:col-span-2 flex justify-center items-center">
           <motion.img
             src="https://pbs.twimg.com/profile_images/1952028965897445376/liE_oQAO_400x400.jpg"

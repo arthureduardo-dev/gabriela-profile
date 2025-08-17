@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 interface DotNavProps {
   sections: string[];
   activeSection: string;
@@ -16,11 +18,21 @@ export const DotNav = ({ sections, activeSection, onNavClick }: DotNavProps) => 
           <span className="absolute right-10 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-dark-purple/80 px-2 py-1 rounded-md capitalize text-text-primary">
             {section}
           </span>
-          <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${activeSection === section ? 'bg-text-primary' : 'bg-dark-purple'}`}>
-             <span className={`font-bold transition-colors duration-300 ${activeSection === section ? 'text-background' : 'text-text-primary'}`}>
+          <motion.div
+            className="w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300"
+            animate={{
+              backgroundColor: activeSection === section ? '#F5F5F5' : '#2a004f',
+              scale: activeSection === section ? 1.2 : 1,
+            }}
+            whileHover={{ scale: 1.3 }}
+          >
+             <motion.span
+              className={`font-bold transition-colors duration-300`}
+              animate={{ color: activeSection === section ? '#0D0D0D' : '#F5F5F5' }}
+             >
               {section.charAt(0).toUpperCase()}
-            </span>
-          </div>
+            </motion.span>
+          </motion.div>
         </button>
       ))}
     </div>

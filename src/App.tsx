@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useScroll } from 'framer-motion';
+import { useScroll, AnimatePresence, motion } from 'framer-motion';
 import { sections } from './data';
 import { DotNav } from './components/DotNav';
 import { Home } from './components/Home';
 import { About } from './components/About';
 import { Stats } from './components/Stats';
 import { Clips } from './components/Clips';
+import { Live } from './components/Live';
 import { Services } from './components/Services';
 import { Contact } from './components/Contact';
 import { StreamerBackground } from './components/StreamerBackground';
@@ -21,7 +22,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 4000); 
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -90,31 +91,44 @@ function App() {
     };
   }, [loading]);
 
-  if (loading) {
-    return (
-      <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-br from-background to-dark-purple text-text-primary font-sans overflow-hidden">
-        <SmileyPreloader />
-      </div>
-    );
-  }
-
   return (
     <CursorProvider>
-      <CustomCursor />
-      <div className="relative min-h-screen bg-gradient-to-br from-background to-dark-purple text-text-primary font-sans overflow-hidden">
-        <StreamerBackground scrollYProgress={scrollYProgress} />
+      <AnimatePresence>
+        {loading && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="relative flex items-center justify-center min-h-screen bg-gradient-to-br from-background to-dark-purple text-text-primary font-sans overflow-hidden"
+          >
+            <SmileyPreloader />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {!loading && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <CustomCursor />
+          <div className="relative min-h-screen bg-gradient-to-br from-background to-dark-purple text-text-primary font-sans overflow-hidden">
+            <StreamerBackground scrollYProgress={scrollYProgress} />
 
-        <div className="relative z-10 section-container">
-          <DotNav sections={sections} activeSection={activeSection} onNavClick={handleNavClick} />
-          
-          <Home />
-          <About onMouseMove={handleMouseMove} />
-          <Stats onMouseMove={handleMouseMove} />
-          <Clips />
-          <Services onMouseMove={handleMouseMove} />
-          <Contact onMouseMove={handleMouseMove} />
-        </div>
-      </div>
+            <div className="relative z-10 section-container">
+              <DotNav sections={sections} activeSection={activeSection} onNavClick={handleNavClick} />
+              
+              <Home />
+              <About onMouseMove={handleMouseMove} />
+              <Stats onMouseMove={handleMouseMove} />
+              <Live />
+              <Clips />
+              <Services onMouseMove={handleMouseMove} />
+              <Contact onMouseMove={handleMouseMove} />
+            </div>
+          </div>
+        </motion.div>
+      )}
     </CursorProvider>
   );
 }

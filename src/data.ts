@@ -28,4 +28,4 @@ export const clipsData = [
   { id: 6, videoId: 'XZUW-RKXE6g' }
 ];
 
-export const sections = ['home', 'about', 'stats', 'clips', 'services', 'contact'];
+export const sections = ['home', 'about', 'stats', 'live', 'clips', 'services', 'contact'];

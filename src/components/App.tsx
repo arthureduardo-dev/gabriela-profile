@@ -1,15 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import { useScroll, AnimatePresence, motion } from 'framer-motion';
 import { sections } from './data';
 import { DotNav } from './components/DotNav';
 import { Home } from './components/Home';
 import { About } from './components/About';
 import { Stats } from './components/Stats';
 import { Clips } from './components/Clips';
+import { Live } from './components/Live';
 import { Services } from './components/Services';
 import { Contact } from './components/Contact';
+import { StreamerBackground } from './components/StreamerBackground';
+import SmileyPreloader from './components/SmileyPreloader';
+import { CustomCursor } from './components/CustomCursor';
+import { CursorProvider } from './context/CursorContext';
 
 function App() {
+  const [loading, setLoading] = useState(true);
   const [activeSection, setActiveSection] = useState('home');
+  const { scrollYProgress } = useScroll();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 4000); 
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -22,28 +38,33 @@ function App() {
   const handleNavClick = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
 
   useEffect(() => {
-    const navObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
+    if (loading) return;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
 
     const animationObserver = new IntersectionObserver(
-      (entries, observer) => {
+      (entries, animObserver) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('section-visible');
-            observer.unobserve(entry.target);
+            animObserver.unobserve(entry.target);
           }
         });
       },
@@ -54,7 +75,7 @@ function App() {
       const element = document.getElementById(id);
       if (element) {
         element.classList.add('section-fade-in');
-        navObserver.observe(element);
+        observer.observe(element);
         animationObserver.observe(element);
       }
     });
@@ -63,25 +84,52 @@ function App() {
       sections.forEach(id => {
         const element = document.getElementById(id);
         if (element) {
-          navObserver.unobserve(element);
+          observer.unobserve(element);
           animationObserver.unobserve(element);
         }
       });
     };
-  }, []);
+  }, [loading]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-dark-purple text-text-primary font-sans">
-      <DotNav sections={sections} activeSection={activeSection} onNavClick={handleNavClick} />
-      <div className="scroll-container hide-scrollbar">
-        <Home />
-        <About onMouseMove={handleMouseMove} />
-        <Stats onMouseMove={handleMouseMove} />
-        <Clips />
-        <Services onMouseMove={handleMouseMove} />
-        <Contact onMouseMove={handleMouseMove} />
-      </div>
-    </div>
+    <CursorProvider>
+      <AnimatePresence>
+        {loading && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="relative flex items-center justify-center min-h-screen bg-gradient-to-br from-background to-dark-purple text-text-primary font-sans overflow-hidden"
+          >
+            <SmileyPreloader />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {!loading && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <CustomCursor />
+          <div className="relative min-h-screen bg-gradient-to-br from-background to-dark-purple text-text-primary font-sans overflow-hidden">
+            <StreamerBackground scrollYProgress={scrollYProgress} />
+
+            <div className="relative z-10 section-container">
+              <DotNav sections={sections} activeSection={activeSection} onNavClick={handleNavClick} />
+              
+              <Home />
+              <About onMouseMove={handleMouseMove} />
+              <Stats onMouseMove={handleMouseMove} />
+              <Live />
+              <Clips />
+              <Services onMouseMove={handleMouseMove} />
+              <Contact onMouseMove={handleMouseMove} />
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </CursorProvider>
   );
 }
 
