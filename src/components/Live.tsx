@@ -7,8 +7,10 @@ import { faTwitch, faKickstarterK } from '@fortawesome/free-brands-svg-icons';
 export const Live = () => {
   const [platform, setPlatform] = useState('twitch');
 
-  const twitchStreamUrl = 'https://player.twitch.tv/?channel=yungyro&parent=localhost&muted=true';
-  const twitchChatUrl = 'https://www.twitch.tv/embed/yungyro/chat?parent=localhost&darkpopout';
+  const dominioDoSite = "yungyro.com.br";
+
+  const twitchStreamUrl = `https://player.twitch.tv/?channel=yungyro&parent=${dominioDoSite}&muted=true`;
+  const twitchChatUrl = `https://www.twitch.tv/embed/yungyro/chat?parent=${dominioDoSite}&darkpopout`;
   const kickUrl = 'https://player.kick.com/yungyro';
 
   return (
@@ -16,7 +18,7 @@ export const Live = () => {
       <div className="w-full max-w-6xl flex flex-col items-center">
         <h2 className="text-2xl font-semibold mb-4 text-text-primary flex items-center font-heading">
           <RadioTower className="mr-3" size={24} />
-          Ao Vivo 
+          Ao Vivo Agora
         </h2>
         
         <div className="flex items-center gap-4 mb-8">
